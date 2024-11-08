@@ -13,20 +13,20 @@
   {% tailwind_css %}
 </head>
 <body class="dark:bg-neutral-900 dark:text-white">
-  <main class="w-full max-w-[800px] m-auto">
+  <main class="w-full max-w-[840px] m-auto px-5">
     <header class="flex items-center justify-between mt-6">
       <div>
         <h3 class="text-xl leading-6 font-medium">Webository • Study</h3>
         <p class="text-sm text-neutral-700 dark:text-neutral-400">Лабораторные работы и статьи</p>
       </div>
-      <div>
+      <div class="hidden md:block">
         <a class="py-2 px-5 transition-colors rounded-tl-full dark:bg-neutral-800 dark:hover:text-white hover:text-neutral-800 rounded-bl-full text-neutral-500 bg-neutral-100" href="#">Войти</a>
         <a class="py-2 px-5 transition-colors rounded-tr-full dark:bg-neutral-800 dark:hover:text-white hover:text-neutral-800 rounded-br-full text-neutral-500 bg-neutral-100" href="#">Регистрация</a>
       </div>
     </header>
 
-    <section class="mt-8 animated">
-      <div class="flex gap-20 justify-between items-start">
+    <section class="mt-10 animated">
+      <div class="flex flex-col md:flex-row gap-5 md:gap-20 justify-between items-start">
         <div class="text-neutral-500">
           <p class="dark:text-neutral-300">Лабораторные работы</p>
           <ul class="mt-1 flex flex-wrap gap-1">
@@ -60,8 +60,8 @@
       </div>
     </section>
 
-    <footer class="mt-20 animated">
-      <div class="flex justify-between">
+    <footer class="mt-20 animated mb-10 text-sm">
+      <div class="flex flex-wrap gap-2 justify-between">
         <a class="text-neutral-500 underline" href="https://github.com/veilag/webository-study">Открытый код проекта</a>
         <p class="text-neutral-500">Развернут на webository.ru</p>
       </div>
