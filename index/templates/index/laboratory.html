@@ -1,0 +1,51 @@
+{% load static tailwind_tags humanize %}
+
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Webository Study</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js" integrity="sha512-aNMyYYxdIxIaot0Y1/PLuEu3eipGCmsEUBrUq+7aVyPGMFH8z0eTP0tkqAvv34fzN6z+201d3T8HPb1svWSKHQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script defer src="{% static 'index/index.js' %}"></script>
+  {% tailwind_css %}
+  <link rel="stylesheet" href="{% static 'index/md.css' %}">
+</head>
+<body class="dark:bg-neutral-900 dark:text-white">
+  <main class="w-full max-w-[800px] m-auto">
+    <header class="flex items-center justify-between mt-6">
+      <div>
+        <h3 class="text-xl leading-6 font-medium">Webository • Study</h3>
+        <p class="text-sm text-neutral-700 dark:text-neutral-400">Лабораторные работы и статьи</p>
+      </div>
+      <div>
+        <a class="py-2 px-5 transition-colors rounded-tl-full dark:bg-neutral-800 dark:hover:text-white hover:text-neutral-800 rounded-bl-full text-neutral-500 bg-neutral-100" href="#">Войти</a>
+        <a class="py-2 px-5 transition-colors rounded-tr-full dark:bg-neutral-800 dark:hover:text-white hover:text-neutral-800 rounded-br-full text-neutral-500 bg-neutral-100" href="#">Регистрация</a>
+      </div>
+    </header>
+
+    <section class="mt-10">
+      <div>
+        <div>
+          <a href="/" class="underline">Назад</a>
+        </div>
+        <div class="mt-3">
+          <h2 class="text-xl font-medium">{{ laboratory.title }}</h2>
+          <p>{{ laboratory.description }}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="markdown mt-12">{{ laboratory.content_rendered|safe }}</section>
+
+    <footer class="mt-20 mb-10">
+      <div class="flex justify-between">
+        <a class="text-neutral-500 underline" href="#">Открытый код проекта</a>
+        <p class="text-neutral-500">Развернут на webository.ru</p>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
