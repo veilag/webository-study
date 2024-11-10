@@ -3,11 +3,14 @@ from . import models
 
 
 def index(request):
-    laboratories = models.LaboratoryWork.objects.all()
+    laboratories = models.LaboratoryWork.objects.all()[:5]
+    independents = models.IndependentWork.objects.all()[:5]
+
     subjects = models.Subject.objects.all()
 
     return render(request, 'index/index.html', {
         'laboratories': laboratories,
+        'independents': independents,
         'subjects': subjects
     })
 

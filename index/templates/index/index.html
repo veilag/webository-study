@@ -5,35 +5,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        content="width=device-width, user-scalable=no, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Webository Study</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js" integrity="sha512-aNMyYYxdIxIaot0Y1/PLuEu3eipGCmsEUBrUq+7aVyPGMFH8z0eTP0tkqAvv34fzN6z+201d3T8HPb1svWSKHQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script defer src="{% static 'index/index.js' %}"></script>
   {% tailwind_css %}
 </head>
+
 <body class="dark:bg-neutral-900 dark:text-white">
   <main class="w-full max-w-[840px] m-auto px-5">
-    <header class="flex items-center justify-between mt-6">
-      <div>
-        <h3 class="text-xl leading-6 font-medium">Webository • Study</h3>
-        <p class="text-sm text-neutral-700 dark:text-neutral-400">Лабораторные работы и статьи</p>
-      </div>
-      <div class="hidden md:block">
-        <a class="py-2 px-5 transition-colors rounded-tl-full dark:bg-neutral-800 dark:hover:text-white hover:text-neutral-800 rounded-bl-full text-neutral-500 bg-neutral-100" href="#">Войти</a>
-        <a class="py-2 px-5 transition-colors rounded-tr-full dark:bg-neutral-800 dark:hover:text-white hover:text-neutral-800 rounded-br-full text-neutral-500 bg-neutral-100" href="#">Регистрация</a>
-      </div>
-    </header>
+    {% include 'components/header.html' %}
 
     <section class="mt-10 animated">
-      <div class="flex flex-col md:flex-row gap-5 md:gap-20 justify-between items-start">
+      <div class="flex flex-col md:flex-row gap-3 md:gap-14 justify-between items-start">
         <div class="text-neutral-500">
-          <p class="dark:text-neutral-300">Лабораторные работы</p>
+          <p class="text-lg md:text-base text-neutral-800 dark:text-neutral-300">Лабораторные работы</p>
           <ul class="mt-1 flex flex-wrap gap-1">
             {% for subject in subjects %}
-              <li>
-                <a class="dark:bg-neutral-800 dark:text-neutral-400 py-1 px-2 bg-neutral-100 rounded-full text-sm" href="#">{{ subject.name }}</a>
-              </li>
+              {% include 'components/items/subject.html' with subject=subject %}
             {% endfor %}
           </ul>
         </div>
@@ -41,31 +31,106 @@
           <p class="text-neutral-500 dark:text-neutral-300 mb-5">Здесь собраны все лабораторные работы по предметам МДК 05.02 и 05.03 и другие, если нужной лабораторной работы здесь нет напиши преподавателю</p>
           <ul class="flex flex-col gap-5">
             {% for laboratory in laboratories %}
-            <li>
-              <a href="/laboratory/{{ laboratory.id }}">
-                <p class="font-medium text-lg leading-5">{{ laboratory.title }}</p>
-                <div class="mt-2 text-neutral-500">
-                  <p class="text-sm">{{ laboratory.subject.name}} - <span>{{ laboratory.created_at|naturaltime }}</span></p>
-                  {% if laboratory.description %}
-                    <p class="text-sm">{{ laboratory.description }}</p>
-                  {% else %}
-                    <p class="text-sm">Без описания</p>
-                  {% endif %}
-                </div>
-              </a>
-            </li>
+              {% include 'components/items/laboratory.html' with laboratory=laboratory %}
             {% endfor %}
           </ul>
         </div>
       </div>
     </section>
 
-    <footer class="mt-20 animated mb-10 text-sm">
-      <div class="flex flex-wrap gap-2 justify-between">
-        <a class="text-neutral-500 underline" href="https://github.com/veilag/webository-study">Открытый код проекта</a>
-        <p class="text-neutral-500">Развернут на webository.ru</p>
+    <section class="mt-10 animated">
+      <div class="flex flex-col md:flex-row gap-3 md:gap-14 justify-between items-start">
+        <div class="text-neutral-500">
+          <p class="text-lg md:text-base text-neutral-800 dark:text-neutral-300">Самостоятельные работы</p>
+          <ul class="mt-1 flex flex-wrap gap-1">
+            {% for subject in subjects %}
+              {% include 'components/items/subject.html' with subject=subject %}
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="w-full max-w-[530px]">
+          <p class="text-neutral-500 dark:text-neutral-300 mb-5">Здесь собраны все самостоятельные работы по предметам МДК 05.02 и 05.03 и другие, если нужной лабораторной работы здесь нет напиши преподавателю</p>
+          <ul class="flex flex-col gap-5">
+            {% for laboratory in laboratories %}
+              {% include 'components/items/laboratory.html' with laboratory=laboratory %}
+            {% endfor %}
+          </ul>
+        </div>
       </div>
-    </footer>
+    </section>
+
+    <div class="hidden md:block mt-10 mb-10 rounded-bl-lg rounded-br-lg bg-gradient-to-t dark:from-neutral-800 from-neutral-100 to-transparent h-20"></div>
+
+    <section class="mt-20 md:mt-0 animated">
+      <div class="flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-medium leading-6">Статьи</h2>
+          <p class="text-neutral-500">Ваши статьи и прочее</p>
+        </div>
+        <div>
+          <a class="py-2 px-5 transition-colors rounded-tl-full dark:bg-neutral-800 dark:hover:text-white hover:text-neutral-800 rounded-bl-full text-neutral-500 bg-neutral-100" href="#">Смотреть все</a>
+        </div>
+      </div>
+
+      <ul class="mt-8 flex gap-y-8 gap-x-2 justify-between flex-wrap">
+        <li>
+          <a href="#">
+            <p class="font-medium line-clamp-1 leading-5">Объединяем Django и TailwindCSS</p>
+            <div class="mt-1">
+              <p class="w-96 line-clamp-2 leading-5 text-sm text-neutral-500">Все очень просто, ведь за нас уже давно придумали библиотеку!</p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <p class="font-medium line-clamp-1 leading-5">Объединяем Django и TailwindCSS</p>
+            <div class="mt-1">
+              <p class="w-96 line-clamp-2 leading-5 text-sm text-neutral-500">Все очень просто, ведь за нас уже давно придумали библиотеку!</p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <p class="font-medium line-clamp-1 leading-5">Объединяем Django и TailwindCSS</p>
+            <div class="mt-1">
+              <p class="w-96 line-clamp-2 leading-5 text-sm text-neutral-500">Все очень просто, ведь за нас уже давно придумали библиотеку!</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section class="mt-14 animated">
+      <div>
+        <h2 class="text-xl font-medium leading-6">Полезные ссылки</h2>
+      </div>
+
+      <ul class="mt-4 flex flex-col gap-4">
+        <li>
+          <a class="flex gap-2 group" href="#">
+            <span class="block transition-all group-hover:my-0 group-hover:bg-neutral-700 my-1.5 rounded-full w-0.5 bg-neutral-400"></span>
+            <div>
+              <p>Документация Django</p>
+              <p class="text-sm text-neutral-500">Описание полезной ссылки, может быть и довольно длинное</p>
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a class="flex gap-2 group" href="#">
+            <span class="block transition-all group-hover:my-0 group-hover:bg-neutral-700 my-1.5 rounded-full w-0.5 bg-neutral-400"></span>
+            <div>
+              <p>Документация TailwindCSS</p>
+              <p class="text-sm text-neutral-500">Описание полезной ссылки, может быть и довольно длинное</p>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    {% include 'components/footer.html' %}
   </main>
 </body>
 </html>
