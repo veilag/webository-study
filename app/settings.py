@@ -19,7 +19,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'tailwind',
     'theme',
-    "markdownfield",
+    "ckeditor",
     'components', 'index'
 ]
 

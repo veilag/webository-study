@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from markdownfield.models import MarkdownField, RenderedMarkdownField
-from markdownfield.validators import VALIDATOR_STANDARD
+from ckeditor.fields import RichTextField
 
 
 class Subject(models.Model):
@@ -19,8 +18,8 @@ class LaboratoryWork(models.Model):
     title = models.CharField(max_length=200, verbose_name="Название")
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name="Предмет")
     description = models.TextField(verbose_name="Описание", default="")
-    content = MarkdownField(rendered_field='content_rendered', default="", validator=VALIDATOR_STANDARD)
-    content_rendered = RenderedMarkdownField(verbose_name="Markdown контент", default="")
+    content = RichTextField(default="", verbose_name="Контент")
+    index = models.IntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
 
     class Meta:
@@ -34,7 +33,9 @@ class LaboratoryWork(models.Model):
 class IndependentWork(models.Model):
     title = models.CharField(max_length=200, verbose_name="Название")
     subject = models.ForeignKey(Subject, on_delete=models.CASCADE, verbose_name="Предмет")
-    content = models.TextField(verbose_name="Контент")
+    description = models.TextField(verbose_name="Описание", default="")
+    content = RichTextField(verbose_name="Контент")
+    index = models.IntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
 
     class Meta:
@@ -47,8 +48,8 @@ class IndependentWork(models.Model):
 
 class Article(models.Model):
     title = models.CharField(max_length=200, verbose_name="Название")
-    content = models.TextField(verbose_name="Контент")
-    author = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Автор")
+    description = models.TextField(verbose_name="Описание", default="")
+    content = RichTextField(verbose_name="Контент")
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата обновления")
 
@@ -57,4 +58,17 @@ class Article(models.Model):
         verbose_name_plural = "Статьи"
 
     def __str__(self):
-        return f"Статья: {self.title} (Автор: {self.author})"
+        return f"Статья: {self.title}"
+
+
+class Links(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField()
+    source = models.TextField()
+
+    class Meta:
+        verbose_name = "Ссылка"
+        verbose_name_plural = "Ссылки"
+
+    def __str__(self):
+        return f"Ссылка: {self.name}"

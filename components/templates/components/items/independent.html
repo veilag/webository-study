@@ -1,0 +1,15 @@
+{% load humanize %}
+
+<li>
+  <a class="block p-3 rounded-md bg-neutral-100 dark:bg-neutral-800 md:dark:bg-transparent md:p-0 md:bg-transparent" href="/independent/{{ independent.id }}">
+    <p class="font-medium text-lg leading-5">{{ independent.title }}</p>
+    <div class="mt-2 text-neutral-500">
+      <p class="text-sm">{{ independent.subject.name}} - <span>{{ independent.created_at|naturaltime }}</span></p>
+      {% if independent.description %}
+        <p class="text-sm">{{ independent.description }}</p>
+      {% else %}
+        <p class="text-sm">Без описания</p>
+      {% endif %}
+    </div>
+  </a>
+</li>

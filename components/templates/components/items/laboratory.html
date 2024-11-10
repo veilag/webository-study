@@ -2,7 +2,7 @@
 
 <li>
   <a class="block p-3 rounded-md bg-neutral-100 dark:bg-neutral-800 md:dark:bg-transparent md:p-0 md:bg-transparent" href="/laboratory/{{ laboratory.id }}">
-    <p class="font-medium text-lg leading-5">{{ laboratory.title }}</p>
+    <p class="font-medium text-lg leading-5"><span class="text-neutral-400">ЛБ№{{ laboratory.index }} </span>{{ laboratory.title }}</p>
     <div class="mt-2 text-neutral-500">
       <p class="text-sm">{{ laboratory.subject.name}} - <span>{{ laboratory.created_at|naturaltime }}</span></p>
       {% if laboratory.description %}

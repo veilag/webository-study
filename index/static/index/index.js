@@ -5,3 +5,8 @@ anime({
     scale: [0.9, 1],
     delay: anime.stagger(100)
 })
+
+const content = document.querySelector(".markdown")
+if (content) {
+    content.innerHTML = content.textContent
+}

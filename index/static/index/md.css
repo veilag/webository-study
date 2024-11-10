@@ -4,20 +4,15 @@
     margin: 15px 0;
 }
 
-.markdown {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.markdown pre {
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #f1f1f1;
-    border: 1px #d0d0d0 solid;
-    font-size: 14px;
+.markdown h1 {
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .markdown li {
-    margin: 0;
+    list-style: inside;
+}
+
+.markdown p {
+    margin-bottom: 10px;
 }
